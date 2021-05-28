@@ -1,0 +1,27 @@
+package com.czarek.learning.java.spoj;
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        int firstNumber = 0, secondNumber = 0, computedSum = 0;
+
+        try {
+            do {
+                firstNumber = scan.nextInt();
+                secondNumber = scan.nextInt();
+            } while (firstNumber < 1 || secondNumber < firstNumber || secondNumber > 100);
+        } catch (Exception x) {
+            x.printStackTrace();
+        }
+        for (int x = firstNumber; x <= secondNumber; x++) {
+            computedSum += x * x;
+        }
+
+        System.out.println(computedSum);
+
+        scan.close();
+    }
+}
