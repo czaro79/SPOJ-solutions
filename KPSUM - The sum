@@ -1,0 +1,62 @@
+package com.czarek.learning.java.bootcamp;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        try {
+            Scanner scan = new Scanner(System.in);
+            int cases = -1;
+            List<Integer> lista = new ArrayList<Integer>();
+
+
+            do {
+                cases = scan.nextInt();
+                if (cases != 0) {
+                    lista.add(cases);
+
+                }
+            } while (cases != 0);
+
+            for (int x :
+                    lista) {
+                System.out.println(sumOfDigits(x));
+            }
+            scan.close();
+
+        } catch (Exception x) {
+            System.out.println(x);
+
+        }
+    }
+
+    public static int sumOfDigits(int number) {
+        boolean sign = false;
+        int sum = 0;
+
+        for (int i = 1; i <= number; i++) {
+
+            String string = Integer.toString(i);
+            for (int j = 0; j < string.length(); j++) {
+                if (sign == false) {
+                    sum += Integer.parseInt(Character.toString(string.charAt(j)));
+                    sign = true;
+                    continue;
+                }
+                if (sign == true) {
+                    sum -= Integer.parseInt(Character.toString(string.charAt(j)));
+                    sign = false;
+                    continue;
+                }
+
+            }
+        }
+
+        return sum;
+    }
+
+}
+
