@@ -1,0 +1,46 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        try {
+            Scanner scan = new Scanner(System.in);
+            int number = 0;
+
+            while (number < 1 || number > 18) {
+                number = scan.nextInt();
+            }
+
+            checkNumber(number);
+            scan.close();
+
+        } catch (Exception x) {
+            System.out.println(x);
+        }
+
+    }
+
+    /**
+     * function name checkNumber()
+     * 
+     * Inside the function: It checks the numbers between 1-18
+     * 
+     * @param int number
+     */
+    public static void checkNumber(int number) {
+        int temp = 0;
+
+        for (int i = 1; i <= 9; i++) {
+            for (int j = 0; j <= 9; j++) {
+                if (i + j == number) {
+                    System.out.println(
+                            Integer.toString(i) + Integer.toString(j) + " = " + i + " + " + j + " = " + number);
+                    temp++;
+                }
+
+            }
+        }
+        if (temp == 0)
+            System.out.println("NO");
+    }
+
+}
