@@ -1,0 +1,90 @@
+package com.czarek.learning.java.bootcamp;
+
+import java.io.File;
+
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        File file = new File("src/Files/movies.txt");
+        Scanner scan = new Scanner(file);
+        ArrayList<String> titlesArray = new ArrayList<>();
+
+        while (scan.hasNext()) {
+            titlesArray.add(scan.nextLine());
+        }
+
+        int randomTitleIndex = (int) (Math.random() * titlesArray.size());
+        String randomTitle = titlesArray.get(randomTitleIndex);
+        String[] hiddenTitle = new String[randomTitle.length()];
+
+        for (int i = 0; i < randomTitle.length(); i++) {
+            if (randomTitle.charAt(i) == ' ') {
+                hiddenTitle[i] = " ";
+
+            } else {
+                hiddenTitle[i] = "_";
+            }
+        }
+        scan = new Scanner(System.in);
+        char sign = ' ';
+        int mistakes = 0;
+        String wrongLetters = "";
+
+        while (mistakes <= 10) {
+            System.out.print("You are guessing:");
+
+            checkLetter(randomTitle, hiddenTitle, sign);
+
+            if (!Arrays.toString(hiddenTitle).contains("_")) {
+                System.out.println("You win!");
+                System.out.println("You have guessed '" + randomTitle + "' correctly.");
+                break;
+
+            }
+
+
+            for (String x : hiddenTitle
+            ) {
+                System.out.print(x);
+            }
+            System.out.println();
+
+            System.out.println("You have guessed (" + mistakes + ") wrong letters:" + wrongLetters);
+
+            System.out.print("Guess a letter:");
+            try {
+                sign = scan.nextLine().charAt(0);
+            } catch (IndexOutOfBoundsException x) {
+
+            }
+            if (!randomTitle.contains(Objects.toString(sign)) && !wrongLetters.contains(Objects.toString(sign))) {
+                mistakes++;
+                wrongLetters += sign + " ";
+            }
+
+        }
+        if (mistakes == 10) {
+            System.out.println("You lost!");
+            System.out.println("The correct title is: '" + randomTitle);
+        }
+        scan.close();
+
+    }
+
+
+    public static void checkLetter(String randomTitle, String[] hiddenTitle, char sign) {
+        for (int i = 0; i < randomTitle.length(); i++) {
+            if (randomTitle.charAt(i) == ' ') {
+                hiddenTitle[i] = " ";
+
+            } else if (randomTitle.charAt(i) == sign) {
+                hiddenTitle[i] = Objects.toString(sign);
+            }
+        }
+    }
+}
+
+
+
